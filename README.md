@@ -19,11 +19,11 @@ On Linux, Discord does not update automatically like on Windows or macOS. This s
 3. **Schedule the script to run at startup**
    Open the crontab editor:
    ```bash
-   crontab -e
+   sudo crontab -e
    ```
    Add the following line at the end:
    ```bash
-   @reboot /usr/local/bin/discord_update.sh
+   @reboot /usr/local/bin/discord_update.sh > /tmp/discord_cron.log 2>&1
    ```
 
 ## Notes

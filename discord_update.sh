@@ -1,4 +1,10 @@
 #!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# Wait for internet connection
+until ping -c1 google.com &>/dev/null; do
+    sleep 5
+done
 
 # Fetch the latest version number from the Discord API
 latest_version=$(curl https://discord.com/api/download\?platform\=linux\&format\=deb -sl | cut -d '"' -f2 | cut -d '>' -f5 | grep "deb" | cut -d '-' -f2 | sed 's/.deb//')
@@ -23,7 +29,7 @@ echo "Downloading Discord $latest_version..."
 curl -L "$DOWNLOAD_URL" -o "$TEMP_DEB"
 
 echo "Installing Discord..."
-sudo dpkg -i "$TEMP_DEB"
+dpkg -i "$TEMP_DEB"
 
 # Cleanup
 rm "$TEMP_DEB"
