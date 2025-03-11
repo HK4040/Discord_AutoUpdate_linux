@@ -34,3 +34,4 @@ dpkg -i "$TEMP_DEB"
 # Cleanup
 rm "$TEMP_DEB"
 echo "Discord update complete!"
+
