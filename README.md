@@ -26,30 +26,5 @@ On Linux, Discord does not update automatically like on Windows or macOS. This s
    @reboot /usr/local/bin/discord_update.sh > /tmp/discord_cron.log 2>&1
    ```
 
-## Notes
-
-### Sudo and Cron
-Since the script uses `sudo` to install the package, ensure that it can run without interactive password prompts at boot. You may need to configure `/etc/sudoers` to allow passwordless execution of `dpkg -i` for your user. To do this, run:
-
-```bash
-sudo visudo
-```
-
-Then add the following line at the end (replace `yourusername` with your actual username):
-
-```bash
-yourusername ALL=(ALL) NOPASSWD: /usr/bin/dpkg -i
-```
-
-⚠️ **Be cautious when editing sudoers, as incorrect configurations may lock you out of sudo access.**
-
-### Environment in Cron
-Cron jobs run in a minimal environment, which is why the script uses full paths (e.g., `/tmp/discord.deb`). Verify that commands like `curl`, `dpkg-query`, and `dpkg-deb` are available in the standard `PATH`. Usually, they are, but if the script fails, check by running:
-
-```bash
-env
-```
-inside a cron job and ensure required commands are accessible.
-
 ---
 Now, every time your system boots up, the script will check if Discord is up-to-date and install a new version if needed. 🚀
